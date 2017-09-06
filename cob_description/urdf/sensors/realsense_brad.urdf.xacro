@@ -5,14 +5,13 @@
 
   <xacro:macro name="realsense" params="name parent ros_topic *origin">
 
-    <!-- realsense rgb sensor physical attachment -->
-    <joint name="${name}_realsense_rgb_joint" type="fixed">
+    <joint name="${name}_joint" type="fixed">
       <xacro:insert_block name="origin" />
       <parent link="${parent}"/>
-      <child link="${name}_realsense_rgb_link"/>
+      <child link="${name}_link"/>
     </joint>
 
-    <link name="${name}_realsense_rgb_link" >
+    <link name="${name}_link">
       <inertial>
         <mass value="0.564" />
         <origin xyz="0 0 0" />
@@ -33,18 +32,8 @@
       </collision>
     </link>
 
-
-    <!-- realsense rgb sensor frame -->
-    <joint name="${name}_realsense_rgb_optical_frame_joint" type="fixed">
-      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-      <parent link="${name}_realsense_rgb_link"/>
-      <child link="${name}_realsense_rgb_optical_frame"/>
-    </joint>
-
-    <link name="${name}_realsense_rgb_optical_frame"/>
-
-    <!-- gazebo extensions -->
-    <xacro:realsense_rgb_gazebo_v0 link_name="${name}_realsense_rgb_link" frame_name="${name}_realsense_rgb_optical_frame" camera_name="${name}"/>
+    <!-- extensions -->
+    <xacro:realsense_gazebo name="${name}" ros_topic="${ros_topic}" />
   </xacro:macro>
 
 </robot>
