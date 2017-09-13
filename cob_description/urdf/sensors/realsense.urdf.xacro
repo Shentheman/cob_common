@@ -22,7 +22,8 @@
        <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <!--<box size="0.002 0.002 0.002"/>-->
-          <mesh filename="package://cob_description/meshes/sensors/sr300_optical_link.STL"/>
+          <mesh filename="package://cob_description/meshes/sensors/sr300_optical_link.dae"/>
+          <!-- <mesh filename="package://cob_description/meshes/sensors/sr300_optical_link.STL"/> -->
           <!-- <mesh filename="package://cob_description/urdf/sensors/intel_realsense_r200/meshes/realsense_r200.dae"/> -->
         </geometry>
         <material name="sr300_gray">
@@ -32,9 +33,10 @@
         </material>
       </visual>
       <collision>
-        <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+        <origin xyz="-0.025 0.0 -0.01" rpy="0 0 0"/>
         <geometry>
-          <box size="0.007 0.130 0.0118"/>
+          <!-- <box size="0.007 0.130 0.0118"/> -->
+          <box size="0.06 0.15 0.05"/>
           <!-- <mesh filename="package://raw_description/meshes/cameras/sr300_optical_link.STL"/> -->
         </geometry>
       </collision>
