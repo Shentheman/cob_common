@@ -54,7 +54,7 @@
     </link>
 
     <!-- gazebo extensions -->
-    <xacro:realsense_rgb_gazebo_v0 link_name="${name}_realsense_rgb_link" frame_name="${name}_realsense_rgb_optical_frame" camera_name="${name}"/>
+    <!-- <xacro:realsense_rgb_gazebo_v0 link_name="${name}_realsense_rgb_link" frame_name="${name}_realsense_rgb_optical_frame" camera_name="${name}"/> -->
   </xacro:macro>
 
 </robot>
