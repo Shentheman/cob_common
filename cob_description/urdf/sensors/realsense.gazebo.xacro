@@ -50,7 +50,6 @@
           <focalLength>0.0</focalLength>
         </plugin>
       </sensor>
-      <material value="Gazebo/Red" />
     </gazebo>
   </xacro:macro>
 

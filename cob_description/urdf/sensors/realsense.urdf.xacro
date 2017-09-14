@@ -49,7 +49,9 @@
       <child link="${name}_realsense_rgb_optical_frame"/>
     </joint>
 
-    <link name="${name}_realsense_rgb_optical_frame"/>
+    <link name="${name}_realsense_rgb_optical_frame">
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    </link>
 
     <!-- gazebo extensions -->
     <xacro:realsense_rgb_gazebo_v0 link_name="${name}_realsense_rgb_link" frame_name="${name}_realsense_rgb_optical_frame" camera_name="${name}"/>
