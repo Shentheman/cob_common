@@ -2,7 +2,9 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 <!-- https://github.com/PR2/pr2_common/blob/kinetic-devel/pr2_description/urdf/sensors/kinect2.gazebo.xacro -->
   <!-- use default values of realsense_camera/r200_nodelet_rgbd -->
-  <xacro:macro name="realsense_rgb_gazebo_v0" params="link_name 
+  <xacro:macro name="realsense_rgb_gazebo_v0" params="
+                                               name
+                                               link_name 
                                                frame_name
                                                camera_name
                                                depth_fps:=30.0 depth_height:=360 depth_width:=480

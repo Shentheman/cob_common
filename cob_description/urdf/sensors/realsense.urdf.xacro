@@ -1,9 +1,21 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 <!-- https://github.com/PR2/pr2_common/blob/kinetic-devel/pr2_description/urdf/sensors/kinect2.urdf.xacro -->
-  <xacro:include filename="$(find cob_description)/urdf/sensors/realsense.gazebo.xacro" />
+  
+  <!-- <xacro:include filename="$(find cob_description)/urdf/sensors/realsense.gazebo.xacro" /> -->
+  
 
-  <xacro:macro name="realsense" params="name parent ros_topic *origin">
+
+  <xacro:macro name="realsense" params="sim name parent ros_topic *origin">
+
+    <!-- The rpy for simulation is different from the rpy setup for the actual camera. If we use the rpy from actual camera in simulation, the view will be wrong -->
+    <xacro:if value="${sim}">
+      <xacro:property name="realsense_rgb_link_visual_rpy" value="${-90/180*pi} 0.0 ${-90/180*pi}"/>
+    </xacro:if>
+    <xacro:unless value="${sim}">
+      <xacro:property name="realsense_rgb_link_visual_rpy" value="0.0 0.0 0.0"/>
+    </xacro:unless>
+
 
     <!-- realsense rgb sensor physical attachment -->
     <joint name="${name}_realsense_rgb_joint" type="fixed">
@@ -11,7 +23,6 @@
       <parent link="${parent}"/>
       <child link="${name}_realsense_rgb_link"/>
     </joint>
-
     <link name="${name}_realsense_rgb_link" >
       <inertial>
         <mass value="0.564" />
@@ -19,10 +30,10 @@
         <inertia ixx="0.003881243" ixy="0.0" ixz="0.0" iyy="0.000498940" iyz="0.0" izz="0.003879257" />
       </inertial>
       <visual>
-       <origin xyz="0 0 0" rpy="0 0 0"/>
+       <origin xyz="0 0 0" rpy="${realsense_rgb_link_visual_rpy}"/>
         <geometry>
           <!--<box size="0.002 0.002 0.002"/>-->
-          <mesh filename="package://cob_description/meshes/sensors/sr300_optical_link.dae"/>
+          <mesh filename="package://cob_description/meshes/sensors/untitled.dae"/>
           <!-- <mesh filename="package://cob_description/meshes/sensors/sr300_optical_link.STL"/> -->
           <!-- <mesh filename="package://cob_description/urdf/sensors/intel_realsense_r200/meshes/realsense_r200.dae"/> -->
         </geometry>
@@ -54,7 +65,8 @@
     </link>
 
     <!-- gazebo extensions -->
-    <!-- <xacro:realsense_rgb_gazebo_v0 link_name="${name}_realsense_rgb_link" frame_name="${name}_realsense_rgb_optical_frame" camera_name="${name}"/> -->
+    <!-- <xacro:realsense_rgb_gazebo_v0 name="${name}" link_name="${name}_realsense_rgb_link" frame_name="${name}_realsense_rgb_optical_frame" camera_name="${name}_gazebo"/> -->
+
   </xacro:macro>
 
 </robot>
