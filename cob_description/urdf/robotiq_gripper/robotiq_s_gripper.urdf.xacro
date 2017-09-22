@@ -17,13 +17,12 @@
     <xacro:robotiq_hand prefix="${name}_" reflect="${reflect}"/>
 
     <!-- ros_control plugin -->
-    <gazebo>
-      <!--<plugin name="RobotiqHandPlugin" filename="libRobotiqHandPlugin.so">-->
-      <plugin name="RobotiqHandPluginSingleHand" filename="libRobotiqHandPluginSingleHand.so">
-        <side>left</side>
-      </plugin>
-    </gazebo>
-
+    <xacro:if value="$(arg sim)">
+      <gazebo>
+        <plugin name="RobotiqHandPluginSingleHand" filename="libRobotiqHandPluginSingleHand.so">
+        </plugin>
+      </gazebo>
+    </xacro:if>
+ 
   </xacro:macro>
-
 </robot>

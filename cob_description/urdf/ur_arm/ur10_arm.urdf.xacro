@@ -4,7 +4,7 @@
   <xacro:include filename="$(find cob_description)/urdf/common.xacro" />
   <xacro:include filename="$(find ur_description)/urdf/ur10.urdf.xacro" />
 
-  <xacro:macro name="ur10" params="parent name *origin">
+  <xacro:macro name="ur10" params="parent name sim *origin">
 
     <!-- mount the arm to the robot -->
     <joint name="${name}_base_joint" type="fixed" >
@@ -17,12 +17,14 @@
     <xacro:ur10_robot prefix="${name}_" joint_limited="true"/>
 
     <!-- ros_control plugin -->
-    <gazebo>
-      <plugin name="ros_control" filename="libhwi_switch_gazebo_ros_control.so">
-        <robotNamespace>${name}</robotNamespace>
-        <filterJointsParam>joint_names</filterJointsParam>
-      </plugin>
-    </gazebo>
+    <xacro:if value="$(arg sim)">
+      <gazebo>
+        <plugin name="ros_control" filename="libhwi_switch_gazebo_ros_control.so">
+          <robotNamespace>${name}</robotNamespace>
+          <filterJointsParam>joint_names</filterJointsParam>
+        </plugin>
+      </gazebo>
+    </xacro:if>
 
   </xacro:macro>
 
