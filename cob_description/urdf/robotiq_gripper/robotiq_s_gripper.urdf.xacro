@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!--<xacro:include filename="$(find cob_description)/urdf/common.xacro" />-->
+  <xacro:include filename="$(find robotiq_s_model_visualization)/cfg/robotiq_hand_macro.urdf.xacro" />
+
+  <xacro:macro name="robotiq" params="parent name reflect sim *origin">
+
+    <!-- mount the gripper to the arm -->
+    <joint name="${name}_robotiq_hand_joint" type="fixed">
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent}"/>
+      <child link="${name}_palm"/>
+    </joint>
+
+    <!-- include universal_robot arm -->
+    <xacro:robotiq_hand prefix="${name}_" reflect="${reflect}"/>
+
+    <!-- ros_control plugin -->
+    <gazebo>
+      <!--<plugin name="RobotiqHandPlugin" filename="libRobotiqHandPlugin.so">-->
+      <plugin name="RobotiqHandPluginSingleHand" filename="libRobotiqHandPluginSingleHand.so">
+        <side>left</side>
+      </plugin>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>
