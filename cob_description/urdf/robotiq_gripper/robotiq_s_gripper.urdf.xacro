@@ -13,28 +13,20 @@
       <child link="${name}_palm"/>
     </joint>
 
-
     <xacro:robotiq_hand prefix="${name}_" reflect="${reflect}" />
 
     <gazebo>
       <plugin name="RobotiqHandPluginSingleHand" filename="libRobotiqHandPluginSingleHand.so">
-        <kp_position>10.0</kp_position>
+        <!-- params from drc_sim in gazebo4 -->
+        <!-- http://gazebosim.org/tutorials?tut=drcsim_robotiq_hand&cat= -->
+        <!-- <kp_position>10.0</kp_position> -->
+        <!-- <kd_position>0.5</kd_position> -->
+        <!-- params from ros-industrial/robotiq in gazebo2 -->
+        <kp_position>1.0</kp_position>
+        <ki_position>0.0</ki_position>
         <kd_position>0.5</kd_position>
       </plugin>
     </gazebo>
-
-
-    <!-- <xacro:robotiq_hand prefix="${name}_" reflect="${reflect}"/> -->
-
-    <!-- ros_control plugin -->
-    <!-- <xacro:if value="$(arg sim)"> -->
-      <!-- <gazebo> -->
-        <!-- <plugin name="RobotiqHandPluginSingleHand" filename="libRobotiqHandPluginSingleHand.so">
-          <kp_position>10</kp_position>
-          <kd_position>0.5</kd_position>
-        </plugin> -->
-      <!-- </gazebo> -->
-    <!-- </xacro:if> -->
  
   </xacro:macro>
 </robot>
