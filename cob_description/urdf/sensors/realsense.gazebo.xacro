@@ -7,11 +7,33 @@
                                                link_name 
                                                frame_name
                                                camera_name
+                                               visualize_wrist_sr300_simulator
                                                depth_fps:=30.0 depth_height:=360 depth_width:=480
                                                color_fps:=30.0 color_height:=480 color_width:=640" >
     <gazebo reference="${link_name}">
+      <!-- This is used for visualize the rgb in gazebo -->
+      <!-- this camera sensor setup is copied from pr2 model in .gazebo/models/pr2/model.sdf -->
+      <!-- https://bitbucket.org/osrf/gazebo_models/src/220aa60a2eaa5f31b52429d08c8e94bd05646e23/pr2/model.sdf?at=default&fileviewer=file-view-default -->
+      <sensor name="${name}_rgb_frame" type="camera">
+        <always_on>true</always_on>
+        <visualize>${visualize_wrist_sr300_simulator}</visualize>
+        <update_rate>${color_fps}</update_rate>
+        <camera>
+          <horizontal_fov>${74.0*M_PI/180.0}</horizontal_fov>
+          <image>
+            <width>${color_width}</width>
+            <height>${color_height}</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.15</near>
+            <far>1.0</far>
+          </clip>
+        </camera>
+      </sensor>
       <sensor type="depth" name="${name}_depth_frame">
         <always_on>true</always_on>
+        <visualize>true</visualize>
         <update_rate>${color_fps}</update_rate>
         <camera>
           <horizontal_fov>${74.0*M_PI/180.0}</horizontal_fov>

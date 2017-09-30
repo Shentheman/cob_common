@@ -6,7 +6,7 @@
   <xacro:property name="cylinder_radius" value="0.05" />  <!--simple collision model for the laser -->
   <xacro:property name="cylinder_length" value="0.15" />
 
-  <xacro:macro name="sick_s300_laser_v0" params="name parent *origin">
+  <xacro:macro name="sick_s300_laser_v0" params="visualize_sick_s300_simulator sim name parent *origin">
     <joint name="${name}_joint" type="fixed">
       <axis xyz="0 1 0" />
       <xacro:insert_block name="origin" />
@@ -36,7 +36,9 @@
 
 
     <!-- gazebo extensions -->
-    <xacro:sick_s300_laser_gazebo_v0 name="${name}"/>
+    <xacro:if value="${sim}">
+      <xacro:sick_s300_laser_gazebo_v0 visualize_sick_s300_simulator="${visualize_sick_s300_simulator}" name="${name}"/>
+    </xacro:if>
   </xacro:macro>
 
 </robot>

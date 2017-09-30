@@ -1,13 +1,15 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="sick_s300_laser_gazebo_v0" params="name">
+  <xacro:macro name="sick_s300_laser_gazebo_v0" params="visualize_sick_s300_simulator name">
     <gazebo reference="${name}_link">
+      <!-- this ray sensor setup is similar to the one in pr2 model in .gazebo/models/pr2/model.sdf -->
+      <!-- https://bitbucket.org/osrf/gazebo_models/src/220aa60a2eaa5f31b52429d08c8e94bd05646e23/pr2/model.sdf?at=default&fileviewer=file-view-default -->
       <sensor name="${name}" type="ray">
         <always_on>true</always_on>
+        <visualize>${visualize_sick_s300_simulator}</visualize>
         <update_rate>12.0</update_rate>
         <pose>0 0 0 0 0 0</pose>
-        <visualize>false</visualize>
         <ray>
           <scan>
             <horizontal>
