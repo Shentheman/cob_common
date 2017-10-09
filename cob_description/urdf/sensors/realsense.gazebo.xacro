@@ -54,9 +54,11 @@
           <updateRate>${color_fps}</updateRate>
           <cameraName>${camera_name}_rgb_gazebo_simulation</cameraName>
           <frameName>${frame_name}</frameName>
-          <imageTopicName>/${camera_name}/rgb/image_raw</imageTopicName>
+          <!-- <imageTopicName>/${camera_name}/rgb/image_raw</imageTopicName> -->
+          <imageTopicName>/${camera_name}/rgb/image_rect_color</imageTopicName>
           <cameraInfoTopicName>/${camera_name}/rgb/camera_info</cameraInfoTopicName>
-          <depthImageTopicName>/${camera_name}/depth/image_raw</depthImageTopicName>
+          <!-- <depthImageTopicName>/${camera_name}/depth/image_raw</depthImageTopicName> -->
+          <depthImageTopicName>/${camera_name}/depth/image_rect</depthImageTopicName>
           <depthImageCameraInfoTopicName>/${camera_name}/depth/camera_info</depthImageCameraInfoTopicName>
           <pointCloudTopicName>/${camera_name}/depth_registered/points</pointCloudTopicName>
           <pointCloudCutoff>0.5</pointCloudCutoff>
@@ -112,9 +114,11 @@
           <updateRate>${color_fps}</updateRate>
           <cameraName>${camera_name}_ir_gazebo_simulation</cameraName>
           <frameName>${frame_name}</frameName>
-          <imageTopicName>/${camera_name}/ir/image_raw</imageTopicName>
+          <!-- <imageTopicName>/${camera_name}/ir/image_raw</imageTopicName> -->
+          <imageTopicName>/${camera_name}/ir/image_rect_ir</imageTopicName>
           <cameraInfoTopicName>/${camera_name}/ir/camera_info</cameraInfoTopicName>
-          <depthImageTopicName>/${camera_name}/depth/image_raw</depthImageTopicName>
+          <!-- <depthImageTopicName>/${camera_name}/depth/image_raw</depthImageTopicName> -->
+          <depthImageTopicName>/${camera_name}/depth/image_rect</depthImageTopicName>
           <depthImageCameraInfoTopicName>/${camera_name}/depth/camera_info</depthImageCameraInfoTopicName>
           <pointCloudTopicName>/${camera_name}/depth/points</pointCloudTopicName>
           <pointCloudCutoff>0.5</pointCloudCutoff>
