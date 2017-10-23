@@ -23,100 +23,98 @@
       <parent link="${parent}"/>
       <child link="${name}_link"/>
     </joint>
-    
-    <!-- <xacro:if value="${sim}"> -->
 
-      <link name="${name}_link" >
-        <inertial>
-          <mass value="0.564" />
-          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-          <inertia ixx="0.003881243" ixy="0.0" ixz="0.0" iyy="0.000498940" iyz="0.0" izz="0.003879257" />
-        </inertial>
-        <visual>
-         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-          <geometry>
-            <!--<box size="0.002 0.002 0.002"/>-->
-            <mesh filename="package://cob_description/meshes/sensors/sr300_optical_link.dae"/>
-            <!-- <mesh filename="package://cob_description/meshes/sensors/sr300_optical_link.STL"/> -->
-            <!-- <mesh filename="package://cob_description/urdf/sensors/intel_realsense_r200/meshes/realsense_r200.dae"/> -->
-          </geometry>
-          <!-- <material name="sr300_gray"> -->
-            <!-- <color rgba="0.75 0.75 0.75 1" /> -->
-            <!-- <color rgba="0.1 0.1 0.1 1" /> -->
-            <!--<color rgba="0.2 0.2 1 1" />-->
-          <!-- </material> -->
-        </visual>
-        <collision>
-          <origin xyz="-0.025 0.0 -0.01" rpy="0.0 0.0 0.0"/>
-          <geometry>
-            <!-- <box size="0.007 0.130 0.0118"/> -->
-            <box size="0.06 0.15 0.05"/>
-            <!-- <mesh filename="package://raw_description/meshes/cameras/sr300_optical_link.STL"/> -->
-          </geometry>
-        </collision>
-      </link>
-
-      <!-- 1(1) rgb_frame -->
-      <joint name="${name}_rgb_frame_joint" type="fixed">
-        <origin xyz="0.0 0.0 0.0" rpy="${frame_joint_rpy}" />
-        <parent link="${name}_link"/>
-        <child link="${name}_rgb_frame"/>
-      </joint>
-      <link name="${name}_rgb_frame">
+    <link name="${name}_link" >
+      <inertial>
+        <mass value="0.564" />
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-      </link>
+        <inertia ixx="0.003881243" ixy="0.0" ixz="0.0" iyy="0.000498940" iyz="0.0" izz="0.003879257" />
+      </inertial>
+      <visual>
+       <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <geometry>
+          <!--<box size="0.002 0.002 0.002"/>-->
+          <mesh filename="package://cob_description/meshes/sensors/sr300_optical_link.dae"/>
+          <!-- <mesh filename="package://cob_description/meshes/sensors/sr300_optical_link.STL"/> -->
+          <!-- <mesh filename="package://cob_description/urdf/sensors/intel_realsense_r200/meshes/realsense_r200.dae"/> -->
+        </geometry>
+        <!-- <material name="sr300_gray"> -->
+          <!-- <color rgba="0.75 0.75 0.75 1" /> -->
+          <!-- <color rgba="0.1 0.1 0.1 1" /> -->
+          <!--<color rgba="0.2 0.2 1 1" />-->
+        <!-- </material> -->
+      </visual>
+      <collision>
+        <origin xyz="-0.025 0.0 -0.01" rpy="0.0 0.0 0.0"/>
+        <geometry>
+          <!-- <box size="0.007 0.130 0.0118"/> -->
+          <box size="0.06 0.15 0.05"/>
+          <!-- <mesh filename="package://raw_description/meshes/cameras/sr300_optical_link.STL"/> -->
+        </geometry>
+      </collision>
+    </link>
 
-      <!-- 1(2) rgb_optical_frame -->
-      <joint name="${name}_rgb_optical_frame_joint" type="fixed">
-        <origin xyz="0.0 0.0 0.0" rpy="${optical_frame_joint_rpy}" />
-        <parent link="${name}_rgb_frame"/>
-        <child link="${name}_rgb_optical_frame"/>
-      </joint>
-      <link name="${name}_rgb_optical_frame">
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-      </link>
+
+    <!-- 1(1) rgb_frame -->
+    <joint name="${name}_rgb_frame_joint" type="fixed">
+      <origin xyz="0.0 0.0 0.0" rpy="${frame_joint_rpy}" />
+      <parent link="${name}_link"/>
+      <child link="${name}_rgb_frame"/>
+    </joint>
+    <link name="${name}_rgb_frame">
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    </link>
+
+    <!-- 1(2) rgb_optical_frame -->
+    <joint name="${name}_rgb_optical_frame_joint" type="fixed">
+      <origin xyz="0.0 0.0 0.0" rpy="${optical_frame_joint_rpy}" />
+      <parent link="${name}_rgb_frame"/>
+      <child link="${name}_rgb_optical_frame"/>
+    </joint>
+    <link name="${name}_rgb_optical_frame">
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    </link>
 
 
-      <!-- 2(1) depth_frame -->
-      <joint name="${name}_depth_frame_joint" type="fixed">
-        <origin xyz="0.0 0.0 0.0" rpy="${frame_joint_rpy}" />
-        <parent link="${name}_link"/>
-        <child link="${name}_depth_frame"/>
-      </joint>
-      <link name="${name}_depth_frame">
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-      </link>
+    <!-- 2(1) depth_frame -->
+    <joint name="${name}_depth_frame_joint" type="fixed">
+      <origin xyz="0.0 0.0 0.0" rpy="${frame_joint_rpy}" />
+      <parent link="${name}_link"/>
+      <child link="${name}_depth_frame"/>
+    </joint>
+    <link name="${name}_depth_frame">
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    </link>
 
-      <!-- 2(2) depth_optical_frame -->
-      <joint name="${name}_depth_optical_frame_joint" type="fixed">
-        <origin xyz="0.0 0.0 0.0" rpy="${optical_frame_joint_rpy}" />
-        <parent link="${name}_depth_frame"/>
-        <child link="${name}_depth_optical_frame"/>
-      </joint>
-      <link name="${name}_depth_optical_frame">
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-      </link>
+    <!-- 2(2) depth_optical_frame -->
+    <joint name="${name}_depth_optical_frame_joint" type="fixed">
+      <origin xyz="0.0 0.0 0.0" rpy="${optical_frame_joint_rpy}" />
+      <parent link="${name}_depth_frame"/>
+      <child link="${name}_depth_optical_frame"/>
+    </joint>
+    <link name="${name}_depth_optical_frame">
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    </link>
 
-      <!-- 3(1) ir_frame -->
-      <joint name="${name}_ir_frame_joint" type="fixed">
-        <origin xyz="0.0 0.0 0.0" rpy="${frame_joint_rpy}" />
-        <parent link="${name}_link"/>
-        <child link="${name}_ir_frame"/>
-      </joint>
-      <link name="${name}_ir_frame">
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-      </link>
+    <!-- 3(1) ir_frame -->
+    <joint name="${name}_ir_frame_joint" type="fixed">
+      <origin xyz="0.0 0.0 0.0" rpy="${frame_joint_rpy}" />
+      <parent link="${name}_link"/>
+      <child link="${name}_ir_frame"/>
+    </joint>
+    <link name="${name}_ir_frame">
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    </link>
 
-      <!-- 3(2) ir_optical_frame -->
-      <joint name="${name}_ir_optical_frame_joint" type="fixed">
-        <origin xyz="0.0 0.0 0.0" rpy="${optical_frame_joint_rpy}" />
-        <parent link="${name}_ir_frame"/>
-        <child link="${name}_ir_optical_frame"/>
-      </joint>
-      <link name="${name}_ir_optical_frame">
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-      </link>
-    <!-- </xacro:if> -->
+    <!-- 3(2) ir_optical_frame -->
+    <joint name="${name}_ir_optical_frame_joint" type="fixed">
+      <origin xyz="0.0 0.0 0.0" rpy="${optical_frame_joint_rpy}" />
+      <parent link="${name}_ir_frame"/>
+      <child link="${name}_ir_optical_frame"/>
+    </joint>
+    <link name="${name}_ir_optical_frame">
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    </link>
 
 
   </xacro:macro>
