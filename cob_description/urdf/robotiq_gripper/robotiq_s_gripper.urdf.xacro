@@ -14,22 +14,24 @@
     </joint>
 
     <xacro:robotiq_hand prefix="${name}_" reflect="${reflect}" />
-
-    <gazebo>
-      <!-- The plugin is located at `./src/robotiq/robotiq_s_model_articulated_gazebo_plugins/include/robotiq_s_model_articulated_gazebo_plugins/RobotiqHandPluginSingleHand_controlMsg.h`. -->
-      <!-- We use this plugin instead of `RobotiqHandPluginSingleHand.h` so that we will publish msg type = `robotiq_s_model_control/SModel_robot_input` and `robotiq_s_model_control/SModel_robot_output` to topics `/SModelRobotInput` and `/SModelRobotOutput` to control BOTH the real and simulated gripper.  -->
-      <!-- If we use `RobotiqHandPluginSingleHand.h`, then we are publishing the msg type = `robotiq_s_model_articulated_msgs/SModelRobotInput` and `robotiq_s_model_articulated_msgs/SModelRobotOutput`. This is fine with simulation, but not real run. Not sure though. -->
-      <plugin name="RobotiqHandPluginSingleHand_controlMsg" filename="libRobotiqHandPluginSingleHand_controlMsg.so">
-        <!-- params from drc_sim in gazebo4 -->
-        <!-- http://gazebosim.org/tutorials?tut=drcsim_robotiq_hand&cat= -->
-        <!-- <kp_position>10.0</kp_position> -->
-        <!-- <kd_position>0.5</kd_position> -->
-        <!-- params from ros-industrial/robotiq in gazebo2 -->
-        <kp_position>1.0</kp_position>
-        <ki_position>0.0</ki_position>
-        <kd_position>0.5</kd_position>
-      </plugin>
-    </gazebo>
+    
+    <xacro:if value="$(arg sim)">
+      <gazebo>
+        <!-- The plugin is located at `./src/robotiq/robotiq_s_model_articulated_gazebo_plugins/include/robotiq_s_model_articulated_gazebo_plugins/RobotiqHandPluginSingleHand_controlMsg.h`. -->
+        <!-- We use this plugin instead of `RobotiqHandPluginSingleHand.h` so that we will publish msg type = `robotiq_s_model_control/SModel_robot_input` and `robotiq_s_model_control/SModel_robot_output` to topics `/SModelRobotInput` and `/SModelRobotOutput` to control BOTH the real and simulated gripper.  -->
+        <!-- If we use `RobotiqHandPluginSingleHand.h`, then we are publishing the msg type = `robotiq_s_model_articulated_msgs/SModelRobotInput` and `robotiq_s_model_articulated_msgs/SModelRobotOutput`. This is fine with simulation, but not real run. Not sure though. -->
+        <plugin name="RobotiqHandPluginSingleHand_controlMsg" filename="libRobotiqHandPluginSingleHand_controlMsg.so">
+          <!-- params from drc_sim in gazebo4 -->
+          <!-- http://gazebosim.org/tutorials?tut=drcsim_robotiq_hand&cat= -->
+          <!-- <kp_position>10.0</kp_position> -->
+          <!-- <kd_position>0.5</kd_position> -->
+          <!-- params from ros-industrial/robotiq in gazebo2 -->
+          <kp_position>1.0</kp_position>
+          <ki_position>0.0</ki_position>
+          <kd_position>0.5</kd_position>
+        </plugin>
+      </gazebo>
+    </xacro:if>
  
   </xacro:macro>
 </robot>
