@@ -3,7 +3,7 @@
 <!-- https://github.com/PR2/pr2_common/blob/kinetic-devel/pr2_description/urdf/sensors/kinect2.gazebo.xacro -->
   
   <!-- use default values of realsense_camera/r200_nodelet_rgbd -->
-  <xacro:macro name="realsense_rgb_gazebo_v0" params=" 
+  <xacro:macro name="r200_rgb_gazebo_v0" params=" 
     name link_name frame_name camera_name visualize_wrist_camera_simulator
     depth_fps:=30.0 
     depth_height:=360 
@@ -78,7 +78,7 @@
   </xacro:macro>
 
   <!-- https://github.com/PR2/pr2_common/blob/kinetic-devel/pr2_description/urdf/sensors/kinect2.gazebo.xacro -->
-  <xacro:macro name="realsense_ir_gazebo_v0" params=" 
+  <xacro:macro name="r200_ir_gazebo_v0" params=" 
     name link_name frame_name camera_name visualize_wrist_camera_simulator
     depth_fps:=30.0 
     depth_height:=360 

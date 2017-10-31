@@ -2,13 +2,17 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 <!-- https://github.com/PR2/pr2_common/blob/kinetic-devel/pr2_description/urdf/sensors/kinect2.urdf.xacro -->
 
-  <xacro:macro name="realsense" params="sim name parent *origin">
+  <xacro:macro name="r200" params="sim name parent *origin">
 
     <!-- The origin roll pitch yaw for the frame_joints in gazebo simulation is different from the one for the real camera! -->
     <xacro:if value="${sim}">
       <!-- this is for pointing the camera to the right direction in gazebo -->
-      <xacro:property name="frame_joint_rpy" value="0.0 ${-90/180*pi} ${90/180*pi}"/>
+      <!-- XXX: Visualizing camera view in gazebo will help you verify the exact position of that camera lens in relative to the physical camera "cube" -->
+      <!-- frame_joint_xyz and frame_joint_rpy = lens_in_r200_mat -->
+      <xacro:property name="frame_joint_xyz" value="0.0 0.047625 0.0111"/>
+      <xacro:property name="frame_joint_rpy" value="0.0 ${-90/180*pi} ${180/180*pi}"/>
       <!-- this is for placing the point cloud on the right position with the correct transformation from the robot in rviz -->
+      <!-- XXX: Visualizing camera view in rviz will help you verify the camera visual image transformation (inverted or not, tilted or not ...) -->
       <xacro:property name="optical_frame_joint_rpy" value="${-90/180*pi} 0.0 ${-90/180*pi}"/>
     </xacro:if>
     <xacro:unless value="${sim}">
@@ -33,7 +37,7 @@
       <visual>
        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
         <geometry>
-          <box size="0.02 0.02 0.02"/>
+          <box size="0.01905 0.1335 0.0222"/>
           <!-- <mesh filename="package://cob_description/meshes/sensors/sr300_optical_link.dae"/> -->
         </geometry>
         <!-- <material name="sr300_gray"> -->
@@ -43,9 +47,9 @@
         <!-- </material> -->
       </visual>
       <collision>
-        <origin xyz="0.035 0 0" rpy="1.57 1.57 0.0"/>
+       <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
         <geometry>
-          <box size="0.03 0.15 0.03"/>
+          <box size="0.01905 0.1335 0.0222"/>
           <!-- <mesh filename="package://raw_description/meshes/cameras/sr300_optical_link.STL"/> -->
         </geometry>
       </collision>
@@ -54,7 +58,7 @@
 
     <!-- 1(1) rgb_frame -->
     <joint name="${name}_rgb_frame_joint" type="fixed">
-      <origin xyz="0.0 0.0 0.0" rpy="${frame_joint_rpy}" />
+      <origin xyz="${frame_joint_xyz}" rpy="${frame_joint_rpy}" />
       <parent link="${name}_link"/>
       <child link="${name}_rgb_frame"/>
     </joint>
@@ -75,7 +79,7 @@
 
     <!-- 2(1) depth_frame -->
     <joint name="${name}_depth_frame_joint" type="fixed">
-      <origin xyz="0.0 0.0 0.0" rpy="${frame_joint_rpy}" />
+      <origin xyz="${frame_joint_xyz}" rpy="${frame_joint_rpy}" />
       <parent link="${name}_link"/>
       <child link="${name}_depth_frame"/>
     </joint>
@@ -95,7 +99,7 @@
 
     <!-- 3(1) ir_frame -->
     <joint name="${name}_ir_frame_joint" type="fixed">
-      <origin xyz="0.0 0.0 0.0" rpy="${frame_joint_rpy}" />
+      <origin xyz="${frame_joint_xyz}" rpy="${frame_joint_rpy}" />
       <parent link="${name}_link"/>
       <child link="${name}_ir_frame"/>
     </joint>
