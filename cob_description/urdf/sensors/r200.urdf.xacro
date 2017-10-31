@@ -18,7 +18,7 @@
     <xacro:unless value="${sim}">
       <xacro:property name="frame_joint_xyz" value="0.0 0.0 0.0"/>
       <xacro:property name="frame_joint_rpy" value="0.0 0.0 0.0"/>
-      <xacro:property name="optical_frame_joint_rpy" value="0.0 0.0 0.0"/>
+      <xacro:property name="optical_frame_joint_rpy" value="0.0 0.0 ${90/180*pi}"/>
     </xacro:unless>
 
 
