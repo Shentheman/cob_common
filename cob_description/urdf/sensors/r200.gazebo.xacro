@@ -87,7 +87,7 @@
 
   <!-- https://github.com/PR2/pr2_common/blob/kinetic-devel/pr2_description/urdf/sensors/kinect2.gazebo.xacro -->
   <xacro:macro name="r200_ir_gazebo_v0" params=" 
-    sim name link_name frame_name camera_name visualize_wrist_camera_simulator
+    name link_name frame_name camera_name visualize_wrist_camera_simulator
     depth_fps:=30.0 
     depth_height:=360 
     depth_width:=480
@@ -95,13 +95,8 @@
     color_height:=480 
     color_width:=640" >
 
-    <xacro:if value="${sim}">
-      <xacro:property name="camera_name_sim" value="${camera_name}"/>
-    </xacro:if>
-    <xacro:unless value="${sim}">
-      <xacro:property name="camera_name_sim" value="${camera_name}_sim"/>
-    </xacro:unless>
-    
+    <xacro:property name="camera_name_sim" value="${camera_name}"/>
+
     <gazebo reference="${link_name}">
       <sensor type="depth" name="${name}_ir_gazebo_simulation">
         <always_on>true</always_on>
