@@ -6,15 +6,26 @@
 
   <xacro:macro name="robotiq" params="parent name reflect sim *origin">
 
+  	<!-- If we use irg-raw3-6 branch of https://github.com/Shentheman/robotiq -->
     <!-- mount the gripper to the arm -->
-    <joint name="${name}_robotiq_hand_joint" type="fixed">
+    <!-- <joint name="${name}_robotiq_hand_joint" type="fixed">
       <xacro:insert_block name="origin"/>
       <parent link="${parent}"/>
       <child link="${name}_palm"/>
     </joint>
-
-    <xacro:robotiq_hand prefix="${name}_" reflect="${reflect}" />
+    <xacro:robotiq_hand prefix="${name}_" reflect="${reflect}" /> -->
     
+
+  	<!-- If we use irg-jade branch of https://github.com/Shentheman/robotiq -->
+    <xacro:include filename="$(find robotiq_s_model_visualization)/cfg/robotiq_hand_macro.urdf.xacro" />
+
+    <xacro:robotiq_hand
+      prefix="${name}_"
+      parent="${parent}"
+      reflect="-1">
+      <xacro:insert_block name="origin"/>
+    </xacro:robotiq_hand>
+
     <xacro:if value="$(arg sim)">
       <gazebo>
         <!-- The plugin is located at `./src/robotiq/robotiq_s_model_articulated_gazebo_plugins/include/robotiq_s_model_articulated_gazebo_plugins/RobotiqHandPluginSingleHand_controlMsg.h`. -->
