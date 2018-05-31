@@ -5,6 +5,12 @@
     <gazebo reference="${parent}_${suffix}_wheel_link">
       <gravity>true</gravity>
       <self_collide>false</self_collide>
+      <!-- http://answers.gazebosim.org/question/19119/wheels-rotating-without-any-order-given/ -->
+      <mu1 value="1.0"/>
+      <mu2 value="1.0"/>
+      <kp  value="10000000.0" />
+      <kd  value="1.0" />
+      <fdir1 value="1 0 0"/>
     </gazebo>
   </xacro:macro>
 
