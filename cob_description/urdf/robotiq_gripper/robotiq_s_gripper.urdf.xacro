@@ -6,7 +6,7 @@
 
   <xacro:macro name="robotiq" params="parent name reflect sim *origin">
 
-  	<!-- If we use irg-raw3-6 branch of https://github.com/Shentheman/robotiq -->
+    <!-- If we use irg-raw3-6 branch of https://github.com/Shentheman/robotiq -->
     <!-- mount the gripper to the arm -->
     <!-- <joint name="${name}_robotiq_hand_joint" type="fixed">
       <xacro:insert_block name="origin"/>
@@ -16,12 +16,45 @@
     <xacro:robotiq_hand prefix="${name}_" reflect="${reflect}" /> -->
     
 
-  	<!-- If we use irg-jade branch of https://github.com/Shentheman/robotiq -->
+    <!-- If we use irg-jade branch of https://github.com/Shentheman/robotiq -->
     <xacro:include filename="$(find robotiq_s_model_visualization)/cfg/robotiq_hand_macro.urdf.xacro" />
+
+
+    <!-- ===================================== -->
+    <!-- FT sensor rough size = box = 0.05 x 0.05 x 0.03 -->
+    <!-- add a link bw arm_wrist_3_link and gripper_palm -->
+    <joint name="$arm_tool0_2_FT_sensor" type="fixed">
+      <!-- length of the FT sensor = 0.03 -->
+      <origin xyz="0 0 0.03" rpy="0 0 0" />
+      <parent link="${parent}"/>
+      <child link="${name}_FT_sensor"/>
+    </joint>
+
+    <link name="${name}_FT_sensor" >
+      <inertial>
+        <mass value="0.1" />
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+      </inertial>
+      <visual>
+        <!-- length of the FT sensor / 2 = 0.03 / 2-->
+       <origin xyz="0.0 0.0 -0.015" rpy="0.0 0.0 0.0"/>
+        <geometry>
+          <box size="0.05 0.05 0.03"/>
+        </geometry>
+      </visual>
+      <collision>
+       <origin xyz="0.0 0.0 -0.015" rpy="0.0 0.0 0.0"/>
+        <geometry>
+          <box size="0.05 0.05 0.03"/>
+        </geometry>
+      </collision>
+    </link>
+    <!-- ===================================== -->
 
     <xacro:robotiq_hand
       prefix="${name}_"
-      parent="${parent}"
+      parent="${name}_FT_sensor"
       reflect="-1">
       <xacro:insert_block name="origin"/>
     </xacro:robotiq_hand>
